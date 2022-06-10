@@ -1,4 +1,8 @@
-import {ApplicationConfig, ApitekusApplication} from './application';
+import {ApitekusApplication, ApplicationConfig} from './application';
+import {DatabaseDataSource} from './datasources';
+import {BitcoinRepository} from './repositories';
+import {BitcoinService} from './services/bitcoints.service';
+import {CronService} from './services/cron.service';
 
 export * from './application';
 
@@ -7,9 +11,19 @@ export async function main(options: ApplicationConfig = {}) {
   await app.boot();
   await app.start();
 
+  const db = new DatabaseDataSource();
+
   const url = app.restServer.url;
-  console.log(`Server is running at ${url}`);
-  console.log(`Try ${url}/ping`);
+
+  const bikeRep = new BitcoinRepository(
+    db,
+  );
+  const bitcoin = new BitcoinService(
+    bikeRep
+  );
+
+  const cron = new CronService(bitcoin);
+  cron.cronSchedule('minute', 'bitcoinTime');
 
   return app;
 }
