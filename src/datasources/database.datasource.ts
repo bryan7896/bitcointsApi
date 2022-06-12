@@ -1,6 +1,7 @@
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
 
+//Configuration object to connect to the database
 const config = {
   name: 'database',
   connector: 'mongodb',

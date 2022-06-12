@@ -16,7 +16,7 @@ export class BitcoinService {
     * but I would have to upload this to the network
     * */
     let bitcoin = {
-      bitcointPrice: getRandomArbitrary(20903.90, 30903.90),
+      bitcointPrice: getRandomArbitrary(20.90, 30.90),
       createdAt: new Date().toISOString(),
       additionalProp1: {}
     }

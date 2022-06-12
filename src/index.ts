@@ -15,6 +15,8 @@ export async function main(options: ApplicationConfig = {}) {
 
   const url = app.restServer.url;
 
+  console.log(`Server is running at ${url}`);
+
   const bikeRep = new BitcoinRepository(
     db,
   );
